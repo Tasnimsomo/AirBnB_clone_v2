@@ -11,12 +11,6 @@ from models.review import Review
 from models.state import State
 from models.user import User
 
-  classes = {
-            'BaseModel': BaseModel, 'User': User, 'Place': Place,
-            'State': State, 'City': City, 'Amenity': Amenity,
-            'Review': Review
-        }
-
 
 class FileStorage:
     """This class manages storage of hbnb models in JSON format"""
@@ -48,6 +42,11 @@ class FileStorage:
 
     def reload(self):
         """Loads storage dictionary from file"""
+		 classes = {
+            'BaseModel': BaseModel, 'User': User, 'Place': Place,
+            'State': State, 'City': City, 'Amenity': Amenity,
+            'Review': Review
+        }	
         try:
             with open(self.__file_path, 'r') as f:
                 temp = json.load(f)
