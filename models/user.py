@@ -1,15 +1,17 @@
 #!/usr/bin/python
-"""
-Update User: (models/user.py)
-"""
+import hashlib
+import models
+import os
+from models.base_model import BaseModel, Base
+from os import getenv
+from sqlalchemy.orm import relationship
 from sqlalchemy import Column, String
-from sqlalchemy.orm import declarative_base
-
-Base = declarative_base()
 
 
-class User(Base):
-    __tablename__ = 'users'
+class User(BaseModel, Base):
+    """Representation of a user"""
+    if getenv('HBNB_TYPE_STORAGE') == 'db':
+        __tablename__ = 'users'
 
     email = Column(String(128), nullable=False)
     password = Column(String(128), nullable=False)
