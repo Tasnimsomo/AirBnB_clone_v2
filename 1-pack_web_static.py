@@ -1,20 +1,18 @@
-#!/usr/bin/python3
-"""1. Compress before sending"""
-
 from fabric.api import local
 from datetime import datetime
 
-
 def do_pack():
-    """
-    Compresses the contents of the web_static folder into a tgz archive.
-    """
     try:
-        current_time = datetime.now().strftime("%Y%m%d%H%M%S")
-        archive_path = "versions/web_static_{}.tgz".format(current_time)
+        now = datetime.now()
+        timestamp = now.strftime("%Y%m%d%H%M%S")
+
         local("mkdir -p versions")
-        local("tar -czvf {} web_static".format(archive_path))
-        return archive_path
+
+        archive_name = "web_static_{}.tgz".format(timestamp)
+
+        local("tar -czvf versions/{} web_static".format(archive_name))
+
+        return "versions/{}".format(archive_name)
     except Exception as e:
-        print("Error packing the archive: {}".format(e))
+        print("An error occurred during archive creation:", e)
         return None
