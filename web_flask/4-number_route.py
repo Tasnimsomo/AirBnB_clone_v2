@@ -18,21 +18,18 @@ def hello():
 def start():
     return ("HBNB")
 
-
 @app.route('/c/<text>', strict_slashes=False)
-def c_text(text):
-    text = text.replace('_', ' ')
-    return "c {}".format(text)
+def c(text):
+    return "C " + text.replace("_", " ")
 
-
+@app.route('/python/', defaults={'text': "is cool"}, strict_slashes=False)
 @app.route('/python/<text>', strict_slashes=False)
-def python_text(text="is cool"):
-    return "Python {}".format(text.replace("_", " "))
+def python(text):
+    return "Python " + text.replace("_", " ")
 
+@app.route('/number/<int:n>', strict_slashes=False)
+def number(n):
+    return f"{n} is a number"
 
-@app.route('/number/<n>', strict_slashes=False)
-def number_n(n):
-		return ("{} is a number".format(n)
-
-if __name__ == "__main__":
+if _name_ == "_main_":
     app.run(host='0.0.0.0', port=5000)
